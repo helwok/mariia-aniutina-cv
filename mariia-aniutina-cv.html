@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mariia Aniutina — QA Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e10;
+    --surface: #16161a;
+    --surface2: #1e1e24;
+    --border: rgba(255,255,255,0.07);
+    --accent: #b8f55a;
+    --accent2: #5affda;
+    --text: #e8e8f0;
+    --muted: #7a7a8c;
+    --tag-bg: rgba(184,245,90,0.08);
+    --tag-border: rgba(184,245,90,0.2);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 72px 0 56px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: 'QA';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(120px, 18vw, 220px);
+    color: rgba(184,245,90,0.04);
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .header-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .name-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(38px, 7vw, 68px);
+    line-height: 1.05;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .title-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    border-radius: 40px;
+    padding: 6px 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--accent);
+    width: fit-content;
+    letter-spacing: 0.05em;
+  }
+
+  .title-badge::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .summary {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.75;
+    max-width: 640px;
+    font-weight: 300;
+  }
+
+  .contacts-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--muted);
+    text-decoration: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    transition: color 0.2s;
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+  }
+
+  .contact-link:hover { color: var(--accent); border-color: var(--tag-border); }
+
+  .contact-link svg { flex-shrink: 0; }
+
+  /* ── SECTIONS ── */
+  main { padding: 0 0 80px; }
+
+  section { padding: 52px 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 32px; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.2s;
+  }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .exp-item:hover { border-color: rgba(184,245,90,0.2); transform: translateY(-2px); }
+  .exp-item:hover::before { opacity: 1; }
+
+  .exp-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .exp-role {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .exp-company {
+    font-size: 13px;
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--surface2);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .exp-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 4px 0;
+  }
+
+  .tool-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(90,255,218,0.06);
+    border: 1px solid rgba(90,255,218,0.15);
+    color: var(--accent2);
+    letter-spacing: 0.04em;
+  }
+
+  .exp-list-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .exp-list-items li {
+    padding-left: 18px;
+    position: relative;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .exp-list-items li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+    top: 2px;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.25s;
+  }
+
+  .skill-card:hover { border-color: var(--tag-border); }
+
+  .skill-category {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .skill-tag {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 5px;
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  /* ── EDUCATION & LANGUAGES ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .info-card-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .info-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .info-card p {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .lang-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .lang-item:last-child { border-bottom: none; }
+
+  .lang-name { font-size: 14px; font-weight: 500; }
+  .lang-level {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 0;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in:nth-child(1) { animation-delay: 0.05s; }
+  .fade-in:nth-child(2) { animation-delay: 0.15s; }
+  .fade-in:nth-child(3) { animation-delay: 0.25s; }
+  .fade-in:nth-child(4) { animation-delay: 0.35s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    header { padding: 48px 0 40px; }
+    .two-col { grid-template-columns: 1fr; }
+    .exp-item { padding: 18px; }
+    .contacts-row { gap: 8px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    h1 { font-size: clamp(32px, 10vw, 48px); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <div class="name-block fade-in">
+        <span class="label">Portfolio / Resume</span>
+        <h1>Mariia <em>Aniutina</em></h1>
+        <div class="title-badge">QA Engineer</div>
+      </div>
+      <p class="summary fade-in">
+        QA Engineer with 3+ years in technical support and root cause analysis. Track record of managing Agile workflows as a Scrum Master and collaborating across departments to resolve critical issues. Technically proficient in Postman, SQL, DevTools, and Playwright.
+      </p>
+      <div class="contacts-row fade-in">
+        <a class="contact-link" href="mailto:mashaanutina2@gmail.com">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 7L2 7"/></svg>
+          mashaanutina2@gmail.com
+        </a>
+        <a class="contact-link" href="tel:+380975186319">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.68 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.59 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.5 5.5l.91-.9a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 15.4v1.52z"/></svg>
+          +38 097 518 63 19
+        </a>
+        <a class="contact-link" href="https://t.me/helwok" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-8.609 3.33c-2.068.8-4.133 1.598-5.724 2.21a405.15 405.15 0 0 1-2.849 1.09c-.42.147-.99.332-1.473.901-.728.968.193 1.798.919 2.286 1.61.516 3.275 1.009 4.654 1.472.509 1.793.997 3.592 1.48 5.388.16.36.506.494.864.498.36-.005.58-.173.732-.272l2.258-1.79 4.282 3.155c.663.49 1.604.233 1.904-.599L22 3.86a2.242 2.242 0 0 0-.802-1.427z"/></svg>
+          @helwok
+        </a>
+        <a class="contact-link" href="https://www.linkedin.com/in/mariia-aniutina" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <!-- EXPERIENCE -->
+    <section>
+      <div class="section-header">
+        <h2>Experience</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="exp-list">
+
+        <div class="exp-item">
+          <div class="exp-top">
+            <div>
+              <div class="exp-role">QA Engineer</div>
+              <div class="exp-company">Current Position</div>
+            </div>
+            <div class="exp-date">Dec 2025 — present</div>
+          </div>
+          <div class="exp-tools">
+            <span class="tool-tag">Jira</span>
+            <span class="tool-tag">TestRail</span>
+            <span class="tool-tag">DevTools</span>
+            <span class="tool-tag">Postman</span>
+            <span class="tool-tag">SQL</span>
+            <span class="tool-tag">Playwright</span>
+            <span class="tool-tag">Docker</span>
+            <span class="tool-tag">DBeaver</span>
+          </div>
+          <ul class="exp-list-items">
+            <li>Analyzed project requirements to identify ambiguities and ensure testability</li>
+            <li>Designed and maintained comprehensive test cases and checklists based on functional specifications</li>
+            <li>Performed comprehensive functional and UI testing of web projects, identifying bugs and edge cases before deployment</li>
+            <li>Reported and tracked 30+ bugs (functional, UI/UX, localization) with clear reproduction steps and video evidence, achieving a high fix rate</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-top">
+            <div>
+              <div class="exp-role">Chat Manager</div>
+              <div class="exp-company">Genesis — Uniwell</div>
+            </div>
+            <div class="exp-date">May 2025 — Dec 2025</div>
+          </div>
+          <ul class="exp-list-items">
+            <li>Analyzed user reports to determine the technical essence of problems and verified functionality on the server side</li>
+            <li>Collected and systematized client requirements, translating them into actionable tasks for the technical team</li>
+            <li>Acted as a key link between Customers, Support, and IT departments for 8 months — 100% of critical bugs were prioritized and resolved</li>
+            <li>Managed data integrity within CRM systems, ensuring all technical information was up-to-date</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-top">
+            <div>
+              <div class="exp-role">Middle Support Manager</div>
+              <div class="exp-company">Visa — Infocus</div>
+            </div>
+            <div class="exp-date">Sep 2024 — May 2025</div>
+          </div>
+          <ul class="exp-list-items">
+            <li>Investigated and documented 50+ complex technical cases monthly, providing developers with logs that reduced bug resolution time</li>
+            <li>Performed root cause analysis through systematic review of user requests and system logs</li>
+            <li>Documented incident details including environment conditions and actual outcomes, streamlining the debugging process</li>
+            <li>Identified and helped fix logic flaws in chatbots, improving automated responses and first-contact resolution rates</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section>
+      <div class="section-header">
+        <h2>Skills</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="skills-grid">
+
+        <div class="skill-card">
+          <div class="skill-category">Testing</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Manual Testing</span>
+            <span class="skill-tag">Black-box</span>
+            <span class="skill-tag">Grey-box</span>
+            <span class="skill-tag">Web Testing</span>
+            <span class="skill-tag">Mobile (Android/iOS)</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-category">Testing Types</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Regression</span>
+            <span class="skill-tag">Smoke</span>
+            <span class="skill-tag">Sanity</span>
+            <span class="skill-tag">Functional</span>
+            <span class="skill-tag">Exploratory</span>
+            <span class="skill-tag">Usability</span>
+            <span class="skill-tag">API Testing</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-category">Test Design Techniques</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Equivalence Partitioning</span>
+            <span class="skill-tag">Boundary Value Analysis</span>
+            <span class="skill-tag">Decision Table</span>
+            <span class="skill-tag">State Transition</span>
+            <span class="skill-tag">Error Guessing</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-category">Documentation</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Test Plan</span>
+            <span class="skill-tag">Test Cases</span>
+            <span class="skill-tag">Checklists</span>
+            <span class="skill-tag">Bug Reports</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-category">Tools & Processes</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Jira</span>
+            <span class="skill-tag">TestRail</span>
+            <span class="skill-tag">Git/GitHub</span>
+            <span class="skill-tag">Postman</span>
+            <span class="skill-tag">Playwright</span>
+            <span class="skill-tag">Terminal</span>
+            <span class="skill-tag">Agile / Scrum</span>
+            <span class="skill-tag">Kanban</span>
+            <span class="skill-tag">SDLC / STLC</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-category">Technical</div>
+          <div class="skill-tags">
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">Chrome DevTools</span>
+            <span class="skill-tag">HTML/CSS</span>
+            <span class="skill-tag">JSON / XML</span>
+            <span class="skill-tag">JavaScript (basic)</span>
+            <span class="skill-tag">Client-Server Architecture</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EDUCATION & LANGUAGES -->
+    <section>
+      <div class="section-header">
+        <h2>Education & Languages</h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="info-card" style="margin-bottom:16px">
+            <div class="info-card-title">University</div>
+            <h3>V.N. Karazin Kharkiv National University</h3>
+            <p>Medicine (Incomplete Master's) · 2020–2025</p>
+          </div>
+          <div class="info-card">
+            <div class="info-card-title">Courses</div>
+            <h3>QA Engineer</h3>
+            <p style="margin-bottom:10px">Mate Academy</p>
+            <h3>UX/UI Designer</h3>
+            <p>Projector Institute</p>
+          </div>
+        </div>
+        <div class="info-card">
+          <div class="info-card-title">Languages</div>
+          <div class="lang-item">
+            <span class="lang-name">Ukrainian</span>
+            <span class="lang-level">Native</span>
+          </div>
+          <div class="lang-item">
+            <span class="lang-name">English</span>
+            <span class="lang-level">B1 Intermediate</span>
+          </div>
+          <div class="lang-item">
+            <span class="lang-name">Polish</span>
+            <span class="lang-level">Intermediate</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /container -->
+</main>
+
+<footer>
+  <div class="container">
+    <span>Mariia Aniutina · QA Engineer · 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
